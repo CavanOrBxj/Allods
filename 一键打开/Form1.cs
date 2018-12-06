@@ -24,6 +24,8 @@ namespace Allods
         private int display_X;
         private int display_Y;
 
+        private int delaytime;
+
         [System.Runtime.InteropServices.DllImport("user32")]
         public extern static void mouse_event(int dwFlags, int dx, int dy, int dwData, IntPtr dwExtraInfo);
         [System.Runtime.InteropServices.DllImport("user32")]
@@ -48,7 +50,7 @@ namespace Allods
 
         void Form1_Load(object sender, EventArgs e)
         {
-           
+            Thread.Sleep(delaytime*1000);
             //调用系统默认的浏览器 
             System.Diagnostics.Process.Start("explorer.exe", url);
             Point selectpoint = new Point();
@@ -89,6 +91,7 @@ namespace Allods
                 display_X = Convert.ToInt32(ini.ReadValue("Coordinate", "displayX"));
                 display_Y = Convert.ToInt32(ini.ReadValue("Coordinate", "displayY"));
                 url = ini.ReadValue("URL", "mainurl");
+                delaytime= Convert.ToInt32(ini.ReadValue("DelayTime", "delay"));
             }
             catch (Exception ex)
             {
